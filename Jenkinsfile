@@ -1,12 +1,12 @@
 pipeline {
     agent any
     tools{
-        maven 'AWS-JENKINS-USER'
+        maven 'M2_HOME'
     }
     environment {
     registry = '676334272140.dkr.ecr.us-east-1.amazonaws.com/ernesto'						
 
-    registryCredential = 'geovie19'
+    registryCredential = 'AWS-JENKINS-USER'
     dockerimage = ''
   }
     stages {
