@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools{
-        maven 'M2_HOME'
+        maven 'AWS-JENKINS-USER'
     }
     environment {
     registry = '676334272140.dkr.ecr.us-east-1.amazonaws.com/ernesto'						
