@@ -8,7 +8,7 @@ pipeline {
         dockerimage = ''
     } 
 
-    stages {
+   stages {
         stage('Checkout'){
             steps{
                 git branch: 'main', url: 'https://github.com/geovie19/geolocation-slave2.git'
