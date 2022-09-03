@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout'){
             steps{
-                git branch: 'main', url: 'https://github.com/geovie19/geolocation-slave.git'
+                git branch: 'main', url: 'https://github.com/geovie19/geolocation-slave2.git'
                 }
         }
         stage('Code Build') {
