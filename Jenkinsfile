@@ -7,7 +7,6 @@ pipeline {
         registry = '676334272140.dkr.ecr.us-east-1.amazonaws.com/ernesto'
         dockerimage = ''
     } 
-
     stages {
         stage('Checkout') {
             steps{
