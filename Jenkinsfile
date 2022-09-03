@@ -7,7 +7,7 @@ pipeline {
         registry = '676334272140.dkr.ecr.us-east-1.amazonaws.com/ernesto'
         dockerimage = ''
     } 
-    stages {
+    stages{
         stage('Checkout') {
             steps{
                 git branch: 'main', url: 'https://github.com/geovie19/geolocation-slave2.git'
