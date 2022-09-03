@@ -4,16 +4,17 @@ pipeline {
         maven 'M2_HOME'
     }
     environment {
-    registry = '676334272140.dkr.ecr.us-east-1.amazonaws.com/ernesto'
+    registry = '676334272140.dkr.ecr.us-east-1.amazonaws.com/ernesto'						
+
+    registryCredential = 'geovie19'
     dockerimage = ''
-   } 
-   stages {
+  }
+    stages {
         stage('Checkout'){
             steps{
-                git branch: 'main', url: 'https://github.com/geovie19/geolocation-slave2.git'
+                git branch: 'main', url: 'https://github.com/geovie19/Geolocation.git'
             }
         }
-       
         stage('Code Build') {
             steps {
                 sh 'mvn clean package'
@@ -24,35 +25,23 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        // Building Docker images
-        stage('Building image') {
-            steps{
-                script {
-                    dockerImage = docker.build registry
-                }
+        stage('Build Image') {
+            steps {
+                script{
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                } 
             }
         }
-        // Uploading Docker images into AWS ECR
-        stage('Building image') {
+        stage('Deploy image') {
             steps{
-                script {
-                    dockerImage = docker.build registry
+                script{ 
+                    docker.withRegistry("https://"+registry,"ecr:us-east-1:"+registryCredential) {
+                        dockerImage.push()
+                    }
                 }
             }
-        }
-        // Uploading Docker images into AWS ECR
-        stage('Pushing to ECR') {
-            steps{
-                script {
-                    sh 'aws ecr get-login-password --region us-east-1 | docker login --username geovie19 --password-stdin 676334272140.dkr.ecr.us-east-1.amazonaws.com'
-
-                    sh 'docker push 676334272140.dkr.ecr.us-east-1.amazonaws.com/ernesto' 
-                }
-            }              
-        }
-        
-             
+        }  
     }
-}  
+}
  
 
