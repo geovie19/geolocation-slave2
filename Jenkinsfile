@@ -14,7 +14,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/geovie19/geolocation-slave2.git'
             }
         }
-    }   
+       
         stage('Code Build') {
             steps {
                 sh 'mvn clean package'
@@ -53,6 +53,7 @@ pipeline {
         }
         
              
-    }                
+    }
+}  
  
 
